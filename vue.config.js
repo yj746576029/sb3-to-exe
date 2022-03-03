@@ -9,7 +9,7 @@ module.exports = {
                     "output":"./dist_electron"//输出文件路径
                 },
                 "win":{//win相关配置
-                    "icon":"./computer.png",//图标，当前图标在根目录下，注意这里有两个坑
+                    "icon":"./jishuyang.png",//图标，当前图标在根目录下，注意这里有两个坑
                     "target": [
                         {
                             "target": "nsis",//利用nsis制作安装程序

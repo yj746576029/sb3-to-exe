@@ -5,6 +5,7 @@
         drag
         accept=".sb3"
         :on-change="change"
+        :on-remove="remove"
         :multiple="false"
         :limit="1"
         action="">
@@ -45,10 +46,13 @@ export default {
     async change(file, fileList) {
       this.file = file
     },
+    async remove(file, fileList) {
+      this.file = null
+    },
     async pack() {
       let loadingInstance = Loading.service({ fullscreen: true });
-      const packageName = 'sb3-to-exe';
-      const zipUrl = `/sb3-player-win-ia32.zip`
+      const packageName = 'sb3-player';
+      const zipUrl = `/win-ia32-unpacked.zip`
       const response = await axios({
         method: 'get',
         url: zipUrl,
@@ -62,12 +66,12 @@ export default {
         // 在zip文件中创建一个内部文件夹
         let newPath = `${packageName}/${path}`;
         // 重命名可执行文件
-        newPath = newPath.replace('sb3-player.exe', `${packageName}.exe`);
+        // newPath = newPath.replace('sb3-player.exe', `${packageName}.exe`);
         setFileFast(zip, newPath, file);
       }
 
-      zip.remove(`${packageName}/resources/app/dist/demo.sb3`);
-      zip.file(`${packageName}/resources/app/dist/demo.sb3`,this.file.raw);
+      zip.remove(`${packageName}/resources/app/demo.sb3`);
+      zip.file(`${packageName}/resources/app/demo.sb3`,this.file.raw);
       zip.generateAsync({type:"blob"})
       .then((content)=> {
         loadingInstance.close();
