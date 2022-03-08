@@ -70,8 +70,8 @@ export default {
         setFileFast(zip, newPath, file);
       }
 
-      zip.remove(`${packageName}/resources/app/demo.sb3`);
-      zip.file(`${packageName}/resources/app/demo.sb3`,this.file.raw);
+      zip.remove(`${packageName}/resources/app/scratch.sb3`);
+      zip.file(`${packageName}/resources/app/scratch.sb3`,this.file.raw);
       zip.generateAsync({type:"blob"})
       .then((content)=> {
         loadingInstance.close();
